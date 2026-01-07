@@ -10,11 +10,12 @@ RUN yarn install --frozen-lockfile
 COPY client ./client
 RUN cd client && yarn install --frozen-lockfile && yarn build
 
-# Copy rest of the source (dist is present in repo) and move built client into public
+# Copy rest of the source and compile TypeScript backend
 COPY . .
 RUN rm -rf public || true
 RUN mkdir -p public
 RUN cp -r client/build/* public/
+RUN yarn tsc
 
 FROM node:16-alpine
 WORKDIR /app
