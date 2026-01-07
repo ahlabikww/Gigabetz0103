@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: gigabetz
+    runtime: node
+    plan: free
+    buildCommand: yarn && yarn build:backend
+    startCommand: node dist/app.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8000
